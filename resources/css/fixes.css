@@ -1,0 +1,116 @@
+/* Ensure form controls use readable foreground colors in both themes */
+@layer base {
+  input,
+  textarea,
+  select,
+  button {
+    color: var(--foreground);
+    background-color: var(--input);
+    border-color: var(--border);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
+  }
+
+  /* Make sure disabled controls look appropriate */
+  input:disabled,
+  textarea:disabled,
+  select:disabled,
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* Map frequently-used utility classes to theme variables so dark mode covers whole UI */
+@layer utilities {
+  .bg-white { background-color: var(--card) !important; }
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700 { color: var(--foreground) !important; }
+
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400 { color: var(--muted-foreground) !important; }
+
+  .bg-muted { background-color: var(--muted) !important; }
+  .bg-gray-100 { background-color: var(--popover) !important; }
+  .border-gray-200,
+  .border-gray-100 { border-color: var(--border) !important; }
+
+  .text-white { color: var(--primary-foreground) !important; }
+  .bg-blue-500, .bg-blue-600 { background-color: var(--primary) !important; color: var(--primary-foreground) !important; }
+
+  /* Sidebar and card helpers */
+  .sidebar-bg { background-color: var(--sidebar) !important; }
+  .card-bg { background-color: var(--card) !important; color: var(--card-foreground) !important; }
+}
+
+/* Small safeguard for elements that hardcode white backgrounds */
+.bg-white * { color: inherit; }
+
+/* Additional utility mappings and dark-mode polish */
+@layer utilities {
+  .bg-gray-50 { background-color: var(--background) !important; }
+  .bg-gray-200 { background-color: color-mix(in srgb, var(--popover) 88%, var(--card) 12%) !important; }
+  .bg-gray-300 { background-color: color-mix(in srgb, var(--popover) 80%, var(--card) 20%) !important; }
+  .bg-gray-400 { background-color: color-mix(in srgb, var(--popover) 70%, var(--card) 30%) !important; }
+
+  .bg-blue-50 { background-color: color-mix(in srgb, var(--primary) 8%, var(--card) 92%) !important; }
+  .bg-blue-100 { background-color: color-mix(in srgb, var(--primary) 16%, var(--card) 84%) !important; }
+  .bg-blue-400 { background-color: color-mix(in srgb, var(--primary) 60%, var(--card) 40%) !important; }
+
+  .text-blue-100 { color: color-mix(in srgb, var(--primary-foreground) 80%, var(--muted-foreground) 20%) !important; }
+
+  .border-white { border-color: var(--card-foreground) !important; }
+  .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.35) !important; }
+  .shadow-lg { box-shadow: 0 8px 20px rgba(0,0,0,0.45) !important; }
+
+  /* Make interactive controls readable */
+  .hover\:bg-gray-50:hover { background-color: var(--popover) !important; }
+  .hover\:bg-gray-100:hover { background-color: var(--popover) !important; }
+  .hover\:bg-gray-200:hover { background-color: var(--popover) !important; }
+  .hover\:bg-blue-600:hover { background-color: color-mix(in srgb, var(--primary) 88%, black 12%) !important; }
+}
+
+/* Message bubble polish: ensure good contrast and subtle elevation */
+.rounded-lg.p-3 {
+  background-color: var(--card) !important;
+  color: var(--card-foreground) !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.35);
+}
+
+/* Incoming / outgoing specific fixes aligning with CSS variables */
+.bg-white { background-color: var(--card) !important; }
+.bg-blue-500 { background-color: var(--primary) !important; color: var(--primary-foreground) !important; }
+.bg-blue-400 { background-color: color-mix(in srgb, var(--primary) 66%, var(--card) 34%) !important; }
+.text-gray-800 { color: var(--card-foreground) !important; }
+.text-gray-700 { color: var(--muted-foreground) !important; }
+
+/* Scrollbar styling for dark mode */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--muted) 60%, var(--border) 40%);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Ensure avatar border adapts */
+.rounded-full.border-2 { border-color: var(--card-foreground) !important; }
+
+/* Modals and dropdowns */
+.bg-white.rounded-lg.shadow-xl { background-color: var(--card) !important; color: var(--card-foreground) !important; border-color: var(--border) !important; }
+
+/* Tooltips / popovers */
+.bg-black { background-color: color-mix(in srgb, var(--card) 10%, black 90%) !important; color: var(--card-foreground) !important; }
+
+/* Make sure status/seen avatars' borders are visible in dark mode */
+.border-white { border-color: var(--card-foreground) !important; }
